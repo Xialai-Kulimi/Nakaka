@@ -8,7 +8,7 @@ import socket
 
 __version__ = 0.1
 username = ''
-password = ''
+password_sha256 = ''
 host = '220.135.245.148'
 
 
@@ -19,14 +19,14 @@ def sha256(input):
 
 
 class CreateSocket:
-    global host, username, password
+    global host, username, password_sha256
 
     def __init__(self, port):
         self.s = socket.socket()
         self.s.connect((host, port))
 
         strs = username + '\n' + str(time.time()) + '\n' + sha256(
-            username + password + str(time.time()))
+            username + password_sha256 + str(time.time()))
         self.s.send(bytes(strs, 'utf8'))
         check = str(self.s.recv(1024), 'utf8')
         if check == 'got':
@@ -36,7 +36,7 @@ class CreateSocket:
 
     def send(self, gist: str, msg: str):
         strs = username + '\n' + gist + '\n' + msg + '\n' + str(time.time()) + '\n' + sha256(
-            username + gist + msg + password + str(time.time()))
+            username + gist + msg + password_sha256 + str(time.time()))
         self.s.send(bytes(strs, 'utf8'))
         check = str(self.s.recv(1024), 'utf8')
         if check == 'got':
@@ -49,7 +49,7 @@ class CreateSocket:
         # print('{data}', data)
         # print(len(data.split('\n')), len(data))
         # print('asd')
-        if data.split('\n')[3] == sha256(data.split('\n')[0]+data.split('\n')[1] + password + data.split('\n')[2]):
+        if data.split('\n')[3] == sha256(data.split('\n')[0] + data.split('\n')[1] + password_sha256 + data.split('\n')[2]):
             if (time.time()-float(data.split('\n')[2])) > 1:
                 return 'Timed out'
             local_msg_log = open(data.split('\n')[0], 'a')
@@ -57,7 +57,7 @@ class CreateSocket:
             self.s.send(bytes('got', 'utf8'))
             return data.split('\n')[0], data.split('\n')[1], data.split('\n')[2]
         else:
-            print(data.split('\n')[3], sha256(data.split('\n')[0]+data.split('\n')[1] + password +data.split('\n')[2]))
+            print(data.split('\n')[3], sha256(data.split('\n')[0] + data.split('\n')[1] + password_sha256 + data.split('\n')[2]))
             return 'Server be hacked'
 
     def disconn(self):
@@ -189,17 +189,18 @@ class Ui_MainWindow(object):
         self.checkBox.setText(_translate("MainWindow", "Remeber me"))
 
     def click_login(self):
+        global username, password_sha256
         # self.label.setText("Wrong password\nor username!")
 
         username = self.lineEdit.text()
-        password = sha256(self.lineEdit_2.text())
+        password_sha256 = sha256(self.lineEdit_2.text())
 
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Warning)
         msg.setText("Username or password is incorrect.")
         # msg.setInformativeText(f"Your username: {self.lineEdit.text()}")
         msg.setWindowTitle("Login Failed")
-        msg.setDetailedText(f"username: {username}\npassword_sha256: {password}")
+        msg.setDetailedText(f"username: {username}\npassword_sha256: {password_sha256}")
         msg.exec_()
     # for i in range(10):
     #     self.label.setStyleSheet("color:rgb(255, 255, 255, 125);font-size:20px")

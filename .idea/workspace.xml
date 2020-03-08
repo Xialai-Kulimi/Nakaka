@@ -26,7 +26,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TRPG-Character-Sheet" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -40,7 +40,7 @@
       <updated>1583656879837</updated>
       <workItem from="1583656882624" duration="22000" />
       <workItem from="1583656919249" duration="24000" />
-      <workItem from="1583677283395" duration="719000" />
+      <workItem from="1583677283395" duration="1266000" />
     </task>
     <servers />
   </component>
@@ -48,6 +48,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1583678549113">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1583678549113" />
     <state x="647" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1583656933458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

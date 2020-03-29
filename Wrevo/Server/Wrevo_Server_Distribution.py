@@ -4,8 +4,8 @@ import os
 import socket
 
 
-def sha256(input):
-    sha_signature = hashlib.sha256(input.encode()).hexdigest()
+def sha256(input_str):
+    sha_signature = hashlib.sha256(input_str.encode()).hexdigest()
     return sha_signature
 
 
